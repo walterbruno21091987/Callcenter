@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginUser">
+
+    <fragment
+        android:id="@+id/loginUser"
+        android:name="com.example.callcenter.LoginUser"
+        android:label="LoginUser" >
+        <action
+            android:id="@+id/action_loginUser_to_userMenu"
+            app:destination="@id/userMenu" />
+        <action
+            android:id="@+id/action_loginUser_to_registerUser"
+            app:destination="@id/registerUser" />
+        <action
+            android:id="@+id/action_loginUser_to_changePassword"
+            app:destination="@id/changePassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/userMenu"
+        android:name="com.example.callcenter.UserMenu"
+        android:label="UserMenu" >
+        <action
+            android:id="@+id/action_userMenu_to_loginUser"
+            app:destination="@id/loginUser" />
+        <action
+            android:id="@+id/action_userMenu_to_changePassword"
+            app:destination="@id/changePassword" />
+        <action
+            android:id="@+id/action_userMenu_to_registerContact"
+            app:destination="@id/registerContact" />
+        <action
+            android:id="@+id/action_userMenu_to_callFragment"
+            app:destination="@id/callFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerUser"
+        android:name="com.example.callcenter.registerUser"
+        android:label="registerUser" >
+        <action
+            android:id="@+id/action_registerUser_to_loginUser"
+            app:destination="@id/loginUser" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePassword"
+        android:name="com.example.callcenter.ChangePassword"
+        android:label="ChangePassword" >
+        <action
+            android:id="@+id/action_changePassword_to_loginUser"
+            app:destination="@id/loginUser" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerContact"
+        android:name="com.example.callcenter.RegisterContact"
+        android:label="RegisterContact" >
+        <action
+            android:id="@+id/action_registerContact_to_userMenu"
+            app:destination="@id/userMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/callFragment"
+        android:name="com.example.callcenter.CallFragment"
+        android:label="CallFragment" >
+        <action
+            android:id="@+id/action_callFragment_to_userMenu"
+            app:destination="@id/userMenu" />
+    </fragment>
+</navigation>
