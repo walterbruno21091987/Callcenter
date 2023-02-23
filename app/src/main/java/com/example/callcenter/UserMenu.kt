@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.callcenter.databinding.FragmentUserMenuBinding
+import com.example.callcenter.entities.User
+import com.example.callcenter.repository.UserRepository
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,11 +48,16 @@ class UserMenu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val userName=arguments?.getString("USERNAME")
+        var user: User?=null
+        if(userName!=null){
+            user= UserRepository.searchUser(userName)}
+        val bundle= bundleOf("USERNAME" to userName )
         binding.btSalir.setOnClickListener {
             findNavController().navigate(R.id.action_userMenu_to_loginUser)
         }
         binding.btCambiarContrasenia.setOnClickListener {
-            findNavController().navigate(R.id.action_userMenu_to_changePassword)
+            findNavController().navigate(R.id.action_userMenu_to_changePassword,bundle)
         }
         binding.btRegistrarNuevoContacto.setOnClickListener {
             findNavController().navigate(R.id.action_userMenu_to_registerContact)

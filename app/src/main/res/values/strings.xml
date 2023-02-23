@@ -11,6 +11,7 @@
     <string name="usuario">USUARIO</string>
     <string name="contrase_a">CONTRASEÑA</string>
     <string name="confirmar_contrase_a">CONFIRMAR CONTRASEÑA</string>
+    <string name="no_si">NO/SI</string>
     <string-array name="colors">
         <item>ROJO</item>
         <item>BLANCO</item>

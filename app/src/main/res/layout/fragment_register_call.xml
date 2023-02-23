@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterCallFragment">
+    tools:context=".RegisterCallFragment"
+    android:orientation="vertical"
+    android:background="@drawable/fodo_callcenter"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<androidx.appcompat.widget.AppCompatTextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/no_si"
+    android:textColor="#F1EEEE"
+    android:textSize="25sp"
+    android:layout_marginStart="340dp"
+    android:layout_marginTop="20dp"/>
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_llamada_exitosa"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="LLAMADA EXITOSA"
+        android:background="@color/teal_200"
+        android:layout_marginTop="20dp"
+        android:paddingStart="5dp"
+        />
 
-</FrameLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_volver_a_llamar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LLAMAR NUEVAMENTE"
+        android:background="@color/teal_200"
+        android:layout_marginTop="20dp"
+        android:paddingStart="5dp"
+        />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="observaciones:"
+            android:textSize="25sp" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_observaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+            android:textSize="20sp"
+         />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

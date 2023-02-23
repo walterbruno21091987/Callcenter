@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.callcenter.databinding.FragmentChangePasswordBinding
 import com.example.callcenter.entities.ColorFavorit
 import com.example.callcenter.entities.User
+import com.example.callcenter.exception.PasswordInvalidException
 import com.example.callcenter.repository.UserRepository
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,11 +52,33 @@ class ChangePassword : Fragment() {
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val userName=arguments?.getString("USERNAME")
+        var user: User?=null
+        if(userName!=null){
+            user=UserRepository.searchUser(userName)}
+        binding.btChangePassword.setOnClickListener{
+         try { val password=binding.etChangePasswordNewPassword.text.toString()
+            val confirmPassword=binding.etChangePasswordConfirmPassword.text.toString()
+            if(User.validatePassword(password)){
+                if(confirmPassword.equals(password)) {
+                    user?.password = binding.etChangePasswordNewPassword.text.toString()
+                    Toast.makeText(context, "CONTRASEÑA CAMBIADA CORRECTAMENTE", Toast.LENGTH_LONG)
+                        .show()
+                    findNavController().navigate(R.id.action_changePassword_to_loginUser)
+                }else{
+                    Toast.makeText(context, "LA CONTRASEÑA DEBE SER IGUAL A LA CONFIRMACION DE LA MISMA", Toast.LENGTH_LONG)
+                        .show()
+
+                }
+            }
+            else {
+                throw PasswordInvalidException("Contraseña invalida, debe contener entre 8 y 16  digitos y almenos una mayuscula y una minuscula ")
+            }}catch (e:PasswordInvalidException){
+             Toast.makeText(context,e.message,Toast.LENGTH_LONG).show()
+            }
+        }
   binding.tvOlvidoContraseniaChangePassword.setOnClickListener {
-      val userName=arguments?.getString("USERNAME")
-      var user: User?=null
-      if(userName!=null){
-       user=UserRepository.searchUser(userName)}
+
       binding.tvOlvidoContraseniaChangePassword.setTextColor(R.color.purple_200)
       binding.lyQuestionChangePassword.visibility=View.VISIBLE
       binding.rbPregunta1.text=ColorFavorit.values().random().detalle.toString()
@@ -61,7 +86,20 @@ class ChangePassword : Fragment() {
       binding.rbPegunta3.text=ColorFavorit.values().random().detalle.toString()
       val listBt= listOf<RadioButton>(binding.rbPregunta1,binding.rbPegunta2,binding.rbPegunta3)
 
-      listBt.random().text=user?.favoritColor?.detalle.toString()?:"DESCONOCIDO"
+      listBt.random().text=user?.favoritColor?.detalle?:"DESCONOCIDO"
+      binding.btResponderChangePassword.setOnClickListener {
+          if(listBt.filter{ it.text.equals(user?.favoritColor?.detalle?:"DESCONOCIDO" )}.first().isChecked){
+              user?.password="Abcd1234"
+              Toast.makeText(context,"SU NIEVA CONTRASEÑA ES ${user?.password} POR FAVOR CAMBIELA",Toast.LENGTH_LONG).show()
+
+              binding.lyQuestionChangePassword.visibility=View.GONE
+          }
+          else{
+              Toast.makeText(context,"RESPUESTA INCORRECTA",Toast.LENGTH_LONG).show()
+              binding.lyQuestionChangePassword.visibility=View.GONE
+              findNavController().navigate(R.id.action_changePassword_to_loginUser)
+          }
+      }
   }
     }
     companion object {
