@@ -11,4 +11,7 @@ val calls:MutableList<Call> = mutableListOf()
    fun callAdd(call:Call):Boolean{
         return calls.add(call)
     }
+    fun getLisctCall():List<Call>{
+        return calls
+    }
 }

@@ -1,13 +1,17 @@
 package com.example.callcenter
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.callcenter.databinding.FragmentCallBinding
+import com.example.callcenter.entities.Contact
 import com.example.callcenter.exception.SearchContactException
 import com.example.callcenter.repository.ContactRepository
 
@@ -34,6 +38,7 @@ class CallFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,26 +49,32 @@ class CallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       try{ val contact=ContactRepository.callContactRandom()
-        binding.tvCodigoPostalCall.text=contact.postalCode.toString()
-        binding.tvMailContactCall.text=contact.email.toString()
-        binding.tvNameSurnameCall.text=contact.nameAndSurname
-        binding.tvProvinciaCall.text=contact.provincia.toString()
-        binding.tvContactPhoneCall.text=contact.phone.toString()
-        binding.tvLocationCall.text=contact.location}catch (e:SearchContactException){
-            Toast.makeText(context,e.message,Toast.LENGTH_LONG).show()
-        }
+       var contact=renderView()
         binding.btSearchNewContact.setOnClickListener {
-            try{ val contact=ContactRepository.callContactRandom()
-                binding.tvCodigoPostalCall.text=contact.postalCode.toString()
-                binding.tvMailContactCall.text=contact.email.toString()
-                binding.tvNameSurnameCall.text=contact.nameAndSurname
-                binding.tvProvinciaCall.text=contact.provincia.toString()
-                binding.tvContactPhoneCall.text=contact.phone.toString()
-                binding.tvLocationCall.text=contact.location}catch (e:SearchContactException){
-                Toast.makeText(context,e.message,Toast.LENGTH_LONG).show()
-            }
+        contact=renderView()
         }
+        if(contact!=null) {
+            binding.btCall.setOnClickListener {
+                val numContact = contact!!.phone
+                val bundle = bundleOf("PHONE" to numContact)
+             findNavController().navigate(R.id.action_callFragment_to_registerCallFragment,bundle)
+            }
+        }}
+
+    private fun renderView():Contact?{
+        var contact:Contact?=null
+        try {
+           contact = ContactRepository.callContactRandom()
+            binding.tvCodigoPostalCall.text = contact.postalCode.toString()
+            binding.tvMailContactCall.text = contact.email.toString()
+            binding.tvNameSurnameCall.text = contact.nameAndSurname
+            binding.tvProvinciaCall.text = contact.provincia.toString()
+            binding.tvContactPhoneCall.text = contact.phone.toString()
+            binding.tvLocationCall.text = contact.location
+        } catch (e: SearchContactException) {
+            Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+        }
+      return contact
     }
 
     companion object {

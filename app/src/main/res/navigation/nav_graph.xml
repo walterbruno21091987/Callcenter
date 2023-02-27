@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_userMenu_to_callFragment"
             app:destination="@id/callFragment" />
+        <action
+            android:id="@+id/action_userMenu_to_listCallFragment"
+            app:destination="@id/listCallFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerUser"
@@ -65,6 +68,28 @@
         android:label="CallFragment" >
         <action
             android:id="@+id/action_callFragment_to_userMenu"
+            app:destination="@id/userMenu" />
+        <action
+            android:id="@+id/action_callFragment_to_registerCallFragment"
+            app:destination="@id/registerCallFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerCallFragment"
+        android:name="com.example.callcenter.RegisterCallFragment"
+        android:label="RegisterCallFragment" >
+        <action
+            android:id="@+id/action_registerCallFragment_to_callFragment"
+            app:destination="@id/callFragment" />
+        <action
+            android:id="@+id/action_registerCallFragment_to_userMenu"
+            app:destination="@id/userMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/listCallFragment"
+        android:name="com.example.callcenter.ListCallFragment"
+        android:label="ListCallFragment" >
+        <action
+            android:id="@+id/action_listCallFragment_to_userMenu"
             app:destination="@id/userMenu" />
     </fragment>
 </navigation>

@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".RegisterCallFragment"
     android:orientation="vertical"
-    android:background="@drawable/fodo_callcenter"
+
     >
 
 <androidx.appcompat.widget.AppCompatTextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/no_si"
-    android:textColor="#F1EEEE"
+
     android:textSize="25sp"
     android:layout_marginStart="340dp"
     android:layout_marginTop="20dp"/>
@@ -24,9 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LLAMADA EXITOSA"
-        android:background="@color/teal_200"
+
         android:layout_marginTop="20dp"
         android:paddingStart="5dp"
+        android:textSize="19sp"
         />
 
 
@@ -35,14 +36,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LLAMAR NUEVAMENTE"
-        android:background="@color/teal_200"
+
         android:layout_marginTop="20dp"
         android:paddingStart="5dp"
+        android:textSize="19sp"
         />
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+
         android:layout_marginTop="20dp"
         android:orientation="vertical">
         <androidx.appcompat.widget.AppCompatTextView
@@ -59,6 +61,21 @@
          />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/bt_registrer_call"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:background="@drawable/button_circular"
+
+    android:layout_marginTop="200dp"
+    android:layout_marginStart="170dp"
+    android:text="REGISTRAR"
+    android:textColor="@color/white"
+    android:focusable="true"
+    android:clickable="true"
+
+    />
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>
