@@ -60,7 +60,7 @@ class CallFragment : Fragment() {
              findNavController().navigate(R.id.action_callFragment_to_registerCallFragment,bundle)
             }
         }}
-
+//estoy probando
     private fun renderView():Contact?{
         var contact:Contact?=null
         try {
